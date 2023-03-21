@@ -50,6 +50,8 @@ def write(names, predictions, title) :
 from keras.utils import load_img
 from keras.utils import img_to_array
 
+import cv2 
+
 def store_2(path, resol) : 
 
     # We store all of the images from the kaggle folder in an array 
@@ -64,10 +66,11 @@ def store_2(path, resol) :
     for image in listdir(folder_dir):
         # check if the image ends with ppm
         if (image.endswith(".ppm")):
-            img = load_img(folder_dir + '/' + image)
-            img = img.resize(resol) # (30,30) as an example 
-            img = img_to_array(img)
-            images.append(img) 
+            img = cv2.imread(folder_dir + '/' + image)
+            RGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            resized=cv2.resize(RGB, (resol[0],resol[1]))
+            arr = asarray(resized)
+            images.append(arr) 
             names.append(image.replace('.ppm',''))
 
     images = array(images)

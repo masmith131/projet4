@@ -76,10 +76,17 @@ def store_2 (names, X_array, y_array, resol) :
 
         # We open the image 
         img = cv2.imread(names[i])
-        # We resize the image 
-        img = cv2.resize(img,(resol[1],resol[0]))
 
-        X_array.append(img)
+        # We change the color convention for cv2 
+        RGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+        # We resize the image 
+        resized=cv2.resize(RGB, (resol[0],resol[1]))
+
+        # We store it into array 
+        arr = asarray(resized)
+
+        X_array.append(arr)
 
     y_array = array(y_array)
     X_array =  array(X_array)
