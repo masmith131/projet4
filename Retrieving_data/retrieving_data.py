@@ -1,12 +1,14 @@
 from os import walk
 from keras.preprocessing.image import ImageDataGenerator
-from keras.utils import load_img
+from keras.utils import load_img, img_to_array
 from glob2 import glob
 
 from PIL import Image 
 from os.path import dirname, realpath, basename
 from numpy import asarray, append, array
 from matplotlib.pyplot import show, figure, imshow
+
+import cv2
 
 #-----------------------------------------------------------------------------
 
@@ -53,7 +55,9 @@ def accessing_2 (path) :
     # Retrieving the names of all files finishing with .ppm or .jpeg in the mentionned Directory 
     # returns a list of string 
 
-    names = glob(path + "\\**\\*.ppm") + glob(path + "\\**\\*.jpeg")
+    names = glob(path + "\\**\\*.ppm") + glob(path + "\\**\\*.jpeg") + glob(path + "\\**\\*.jp2")
+    print("number of images in the folder : ", len(names))
+
     return names 
 
 #-----------------------------------------------------------------------------
@@ -71,12 +75,9 @@ def store_2 (names, X_array, y_array, resol) :
         y_array.append((float(basename(dirname(realpath(names[i]))))))
 
         # We open the image 
-        img = Image.open(names[i])
+        img = cv2.imread(names[i])
         # We resize the image 
-        img = img.resize((resol[1],resol[0]))
-
-        # We store the image 
-        img = array(img)
+        img = cv2.resize(img,(resol[1],resol[0]))
 
         X_array.append(img)
 
