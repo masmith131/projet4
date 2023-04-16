@@ -40,7 +40,7 @@ def graphs (nbr_class, set_1, set_2, name_1, name_2) :
 
 #-----------------------------------------------------------------------------
 
-def to_jpeg (folder_dir) : 
+def to_jpeg (folder_dir, dest) : 
 
     # Here is a code to save all ppm in jpeg in a directory (must be created)
 
@@ -48,4 +48,4 @@ def to_jpeg (folder_dir) :
         # check if the image ends with ppm
         if (image.endswith(".ppm")):
             img = Image.open(folder_dir + '/' + image)
-            img.save("challenge_1/visu" + '/' + image.replace('.ppm','.jpg'), format = 'JPEG') 
+            img.save(dest + '/' + image.replace('.ppm','.jpg'), format = 'JPEG') 

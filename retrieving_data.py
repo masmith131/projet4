@@ -28,8 +28,8 @@ def accessing (path, resol) :
 
     # Creating an image.DirectoryIterator to work over the images of the folder  
 
-    datagen = ImageDataGenerator(rescale=1./255)
-    set = datagen.flow_from_directory(path,target_size = resol,
+    datagen = ImageDataGenerator( rescale =1./255)
+    set = datagen.flow_from_directory(path,target_size = (resol,resol),
     batch_size = counter,class_mode = 'binary', color_mode='rgb')
 
     return set
@@ -43,8 +43,8 @@ def store (iter) :
 
     X_iter , y_iter = iter.next()
 
-    print("Shape of X : ", X_iter.shape)
-    print("Shape of y : ", y_iter.shape)
+    print("Shape of X_train : ", X_iter.shape)
+    print("Shape of y_train : ", y_iter.shape)
 
     return X_iter, y_iter
 

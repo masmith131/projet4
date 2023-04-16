@@ -68,7 +68,7 @@ def store_2(path, resol) :
         if (image.endswith(".ppm") or image.endswith(".jpeg")):
             img = cv2.imread(folder_dir + '/' + image)
             RGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            resized=cv2.resize(RGB, (resol[0],resol[1]))
+            resized=cv2.resize(RGB, (resol,resol))
             arr = asarray(resized)
             images.append(arr) 
             names.append(image.replace('.ppm',''))
